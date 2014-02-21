@@ -1,3 +1,5 @@
+# Uses fabrication gem to create objects
+# creates an instance of class User with name, etc. attributes
 Fabricator(:user) do
   name     'Test User'
   email    'example@example.com'
