@@ -1,7 +1,13 @@
 require 'spec_helper'
 
+# the rspec is testing the User class.
 describe User do
 
+# before each test (e.g. each "it 'should' section")
+# create instance variable @attr that is hash of
+# name, email, password, password_confirmation
+# instance variable so that can variable can be
+# accessed by the tests
   before(:each) do
     @attr = {
       :name => "Example User",
@@ -11,12 +17,19 @@ describe User do
     }
   end
 
+# the "should ..." string is just a description for humans
   it "should create a new instance given a valid attribute" do
+    # .create is .new, .save; .create! is .new, .save! (throws error if saving fails)
+    # creates a new user instance using @attr,
+    # and error if fails to save
     User.create!(@attr)
   end
 
   it "should require an email address" do
     no_email_user = User.new(@attr.merge(:email => ""))
+    # => no_email_user.valid? #fails if valid
+    # .valid?  checks against your validations within you ActiveRecord
+    # model class e.g. "validates :email, presence: true"
     no_email_user.should_not be_valid
   end
 
